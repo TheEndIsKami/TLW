@@ -7,6 +7,9 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpSpeed = 10f;
+    [SerializeField] Transform gunPoint;
+    [SerializeField] GameObject arrow;
+
     Vector2 moveInput;
     Rigidbody2D rb;
     CapsuleCollider2D myBodyCollider;
@@ -38,6 +41,10 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = playerVelocity;
     }
 
+    void OnFire(InputValue value)
+    {
+        Instantiate(arrow, gunPoint.position, transform.rotation);
+    }
     void OnJump(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) return;
