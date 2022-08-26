@@ -7,9 +7,8 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float runSpeed = 8f;
     [SerializeField] float jumpSpeed = 10f;
-    [SerializeField] Transform gunPoint;
-    [SerializeField] GameObject arrow;
 
+    [SerializeField] Bow bow;
     Vector2 moveInput;
     Rigidbody2D rb;
     CapsuleCollider2D myBodyCollider;
@@ -34,6 +33,10 @@ public class PlayerMovement : MonoBehaviour
 
         if (playerHasHorizonSpeed) transform.localScale = new Vector2(Mathf.Sign(rb.velocity.x), 1f);
     }
+    void OnFire(InputValue value)
+    {
+        Instantiate(bow.arrow, bow.gunPoint.position, bow.gunPoint.rotation);
+    }
 
     void Run()
     {
@@ -41,10 +44,6 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = playerVelocity;
     }
 
-    void OnFire(InputValue value)
-    {
-        Instantiate(arrow, gunPoint.position, transform.rotation);
-    }
     void OnJump(InputValue value)
     {
         if (!myFeetCollider.IsTouchingLayers(LayerMask.GetMask("Ground"))) return;
