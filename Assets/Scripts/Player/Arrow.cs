@@ -34,4 +34,9 @@ public class Arrow : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
     }
+
+    public void Hit()
+    {
+        Destroy(gameObject);
+    }
 }
